@@ -10,7 +10,7 @@ import {Platform, ActionSheetController} from 'ionic-angular';
 import firebase from 'firebase';
 
 export const FireBaseConfig = {
-  apiKey: "AIzaSyAMlEZm2laRa6RpDFoXaZfLVTNJkroTjyU",
+  apiKey: 
     authDomain: "groceries-41d43.firebaseapp.com",
     databaseURL: "https://groceries-41d43.firebaseio.com",
     storageBucket: "groceries-41d43.appspot.com",
