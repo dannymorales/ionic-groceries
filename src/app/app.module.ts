@@ -11,10 +11,7 @@ import firebase from 'firebase';
 
 export const FireBaseConfig = {
   apiKey: 
-    authDomain: "groceries-41d43.firebaseapp.com",
-    databaseURL: "https://groceries-41d43.firebaseio.com",
-    storageBucket: "groceries-41d43.appspot.com",
-    messagingSenderId: "649363684420"
+   
 }
 @NgModule({
   declarations: [
