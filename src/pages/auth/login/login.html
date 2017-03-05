@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Log In with Email
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-email">
+  <!-- <ion-row>
+    <div padding class="forgot-password-txt" (click)="openForgotPasswordPage()">
+      Forgot Password
+    </div>
+    <div padding class="sign-up-txt" (click)="openSignUpPage()">
+      Sign Up
+    </div>
+  </ion-row> -->
+
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button type="submit" [disabled]="!formData.valid" class="log-in-btn">Log In</button>
+
+
+    <div padding class="error" *ngIf="error">
+      <p>{{error}}</p>
+    </div>
+  </form>
+</ion-content>
