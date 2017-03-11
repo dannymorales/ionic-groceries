@@ -15,13 +15,6 @@ export class Groceries {
 
   constructor(public navCtrl: NavController, public ac: AlertController, private af: AngularFire) {
 
-    this.af.auth.subscribe(auth => {
-      if(!auth){
-        this.navCtrl.setRoot(LoginPage);
-        console.log('you are not logged in');
-
-        }
-      });
   }
 
 
@@ -31,7 +24,9 @@ export class Groceries {
       equalTo: firebase.auth().currentUser.uid
 
     }
-  })
+  });
+
+
 
   getItems(){
     return this.groceries
@@ -80,12 +75,16 @@ export class Groceries {
   //   this.groceries.push({name, category, amount});
   // }
 
+  logout(){
+    this.af.auth.logout();
+    this.navCtrl.setRoot(LoginPage);
+  }
   ngOnInit(){
-    this.af.auth.subscribe(auth => {
-      if(!auth){
+    console.log(this.groceries)
+    this.af.auth.subscribe(user => {
+      if(!user){
         this.navCtrl.setRoot(LoginPage);
         console.log('you are not logged in');
-
         }
       });
   }

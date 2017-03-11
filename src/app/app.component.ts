@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Nav, Platform} from 'ionic-angular';
+import { Nav, Platform, AlertController} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
@@ -18,28 +18,34 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // VARIABLES
-  rootPage: any = LoginPage;
+  rootPage: any = Settings;
   zone: any
   pages: Array<{title: string, component: any}>;
+  fireAuth: any;
 
   // END OF VARIABLES
 
-  constructor(public platform: Platform, private af: AngularFire) {
+  constructor(public platform: Platform, private af: AngularFire, public ac: AlertController) {
     this.zone = new NgZone({});
     this.initializeApp();
+    this.af.auth.subscribe( user => {
+      if (user){
+        this.fireAuth = user.auth.displayName
+        console.log(this.fireAuth)
+      }
+    });
 
 
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Groceries', component: Groceries },
+      // { title: 'Groceries', component: Groceries },
       { title: 'Settings', component: Settings },
-      { title: 'Login', component: LoginPage }
-
-
+      // {  title: 'Login', component: LoginPage }
     ];
-
   }
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -55,8 +61,15 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-
   logout(){
     this.af.auth.logout();
+    this.nav.push(Settings)
+  }
+  login(){
+    this.nav.setRoot(LoginPage)
+  }
+
+  groceries(){
+    this.nav.setRoot(Groceries);
   }
 }

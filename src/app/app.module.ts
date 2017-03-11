@@ -10,8 +10,9 @@ import {Platform, ActionSheetController} from 'ionic-angular';
 import firebase from 'firebase';
 
 export const FireBaseConfig = {
-  apiKey: 
-   
+
+
+
 }
 @NgModule({
   declarations: [

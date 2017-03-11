@@ -18,17 +18,29 @@ import * as firebase from 'firebase'
 export class LoginPage {
 state: string = '';
 error: any;
-
-
+email: any;
+user = firebase.auth.FacebookAuthProvider.name
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, private af: AngularFire) {
-    this.af.auth.subscribe( auth => {
-      if(auth){
+    this.af.auth.subscribe( user => {
+      if(user){
         this.navCtrl.setRoot(Groceries);
-        console.log('you are logged in');
-        console.log(firebase.auth().currentUser.uid)
       }
     });
+  }
+
+
+  fb(){
+      this.af.auth.login({
+        provider: AuthProviders.Facebook,
+        method: AuthMethods.Popup
+      }).then((success) =>{
+        console.log('you logged in with facebook');
+        console.log(this.user)
+        this.navCtrl.setRoot(Groceries);
+      }).catch((err) => {
+        this.error = err
+      })
   }
 
   onSubmit(formData){
@@ -47,6 +59,7 @@ error: any;
         this.error = err
       });
     }
+
   }
 
 
